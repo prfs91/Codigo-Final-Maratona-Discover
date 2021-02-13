@@ -19,38 +19,36 @@ const Modal = {
     //estudar toogle e tentar substituir
 }
 
-const transactions = [
-    {
-        description:'Luz',
-        amount: -50001,
-        date: '23/01/2021'
-    },
-
-    {
-        description:'Website',
-        amount: 500000,
-        date: '23/01/2021'
-    },
-
-    {
-        description:'Internet',
-        amount: -20012,
-        date: '23/01/2021'
-    },
-
-    {
-        description:'App',
-        amount: 200000,
-        date: '23/01/2021'
-    }
-]
-
 //Eu preciso somar as entradas
 //depois eu preciso somar as saídas e
 //remover das entradas o valor das saídas
 //assim, eu terei o total
 const Transaction = {
-    all: transactions,
+    all: [
+        {
+            description:'Luz',
+            amount: -50001,
+            date: '23/01/2021'
+        },
+    
+        {
+            description:'Website',
+            amount: 500000,
+            date: '23/01/2021'
+        },
+    
+        {
+            description:'Internet',
+            amount: -20012,
+            date: '23/01/2021'
+        },
+    
+        {
+            description:'App',
+            amount: 200000,
+            date: '23/01/2021'
+        }
+    ],
 
     add(transaction){
         Transaction.all.push(transaction)
@@ -178,6 +176,54 @@ const Utils = {
     }
 }
 
+const Form = {
+
+    description: document.querySelector('input#description'),
+    amount: document.querySelector('input#amount'),
+    date: document.querySelector('input#date'),
+    
+    getValues() {
+        return {
+            description: Form.description.value,
+            amount: Form.amount.value,
+            date: Form.date.value
+        }
+    },
+
+    validateFields() {
+
+        const {description, amount, date} = Form.getValues()
+        
+        if (description.trim() == "" || // trim faz uma limpeza de espaços vazios
+            amount.trim() == "" || 
+            date.trim() == "") {
+                throw new Error("Por favor, preencha todos os campos")
+            } 
+    },
+
+    submit(event) {
+        event.preventDefault()
+
+        try {
+
+            // Verificar se todas as informações foram preenchidas
+            Form.validateFields()
+
+            // Formatar os dados para salvar
+            // Form.formatData()
+            // Salvar
+            // Apagar os dados do formulário
+            // Modal feche
+            // Atualizar a aplicação
+
+        } catch (error) {
+            alert(error.message)
+        }
+
+    },
+
+}
+
 const App = {
     init() {
 
@@ -196,10 +242,3 @@ const App = {
 }
 
 App.init()
-
-Transaction.add({
-    id: 39,
-    description: 'Alô',
-    amount: 200,
-    date: '23/01/2021'
-})
